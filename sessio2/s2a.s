@@ -15,3 +15,4 @@ main:
 	xor $s1, $s1, $s2
 
 	jr $ra
+s
