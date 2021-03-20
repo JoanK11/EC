@@ -1,5 +1,6 @@
 # PRACTICA 2 #######################
-  .data
+
+	.data
 w:        .asciiz "8754830094826456674949263746929"
 resultat: .byte 0
 
@@ -50,7 +51,7 @@ moda:
 	li $t1, 10
 	move $t2, $sp		# $t2 = histo[0]
 for1:
-	bgeu $t0, $t1, fifor1
+	beq $t0, $t1, fifor1
 	sw $zero, 0($t2)
 	addiu $t2, $t2, 4
 	addiu $t0, $t0, 1
@@ -64,7 +65,7 @@ fifor1:
 	move $s3, $ra
 	
 for2:
-	bgeu $s2, $s1, fifor2
+	beq $s2, $s1, fifor2
 	addu $t0, $s0, $s2 	# $t0 = &vec[k]
 	lb $t0, 0($t0)
 	li $t2, '0'
