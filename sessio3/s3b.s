@@ -1,7 +1,6 @@
 	# Sessio 3
 
 	.data 
-# Declara aqui les variables mat1, mat4 i col
 mat1:	.space 120
 mat4:	.word 2, 3, 1, 2, 4, 3
 col:	.word 2
@@ -9,7 +8,6 @@ col:	.word 2
 	.text 
 	.globl main
 main:
-# Escriu aqui el programa principal
 	addiu $sp, $sp, -8
 	la $t0, mat1
 	sw $t0, 0($sp)
@@ -36,7 +34,6 @@ main:
 	jr $ra
 
 subr:
-# Escriu aqui el codi de la subrutina
 	sll $t0, $a1, 2		# $t0 = i * 4
 	addu $t1, $t0, $t0	# $t0 + $t0 = $t0 * 2
 	addu $t0, $t0, $t1	# ($t0 + $t0) + $t0 = $t0 * 3
