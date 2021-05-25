@@ -19,7 +19,6 @@ salta:
 	addiu $t0, $t0, 4
 	bne $t0, $t7, for
 	
-	# Part opcional per comprovar el resultat de max_abs
 	li $v0, 1
 	move $a0, $t1
 	syscall
