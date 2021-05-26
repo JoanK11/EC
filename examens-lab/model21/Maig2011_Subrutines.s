@@ -66,4 +66,3 @@ subr2:
 else:
 	mflo $v0 
 	jr $ra
-	
