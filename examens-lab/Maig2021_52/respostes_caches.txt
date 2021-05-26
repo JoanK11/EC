@@ -6,3 +6,4 @@ c) En l'apartat a) teniem iteracions on A i max_parella compartien el mateix blo
    una sèrie d'accesos on s'anirien reemplaçant A per max_parella, passant a produir-se més miss que en les altres iteracions.
    En l'apartat b), amb una cache associativa de dues vies, A i max_parella mai s'arriben a reemplaçar, ja que cadascuna ocupa una via de cache diferent i en
    cap moment s'intersequen entre ells.
+s
