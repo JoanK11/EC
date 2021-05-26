@@ -1,0 +1,17 @@
+a) El percentatge de fallades és d'un 35%. 168 accessos a memòria, 110 encerts i 58 fallades.
+
+b) Les iteracions on la i és senar el vector i la matriu ocupen el mateix bloc a la memòria cache,
+   i això causa que hagin de compartir bloc i sempre s'estiguin reemplaçant l'un amb l'altre.
+
+c) Sí. Tenint una cache associativa per conjunts de dues vies milloraríem la taxa d'encerts i reduiríem la de fallades.
+   En el cas on no hi havia solapament anteriorment (i parella) no hi hauria canvi, però ara, en els casos on
+   la i fos senar ja no tindríem reemplaçament, ja que el vector ocuparia una via i la matriu l'altra, sense
+   produir-se cap reemplaçament entre els dos.
+
+d) El mínim nombre de fallades serien 16, una fallada per cada bloc nou de cache (2 del vector i 14 de la matriu).
+   Un grau d'associativitat de 2 vies de 2 blocs cadascuna. El guany és d'un 35/10 = 3.5.
+
+e) 8 fallades (1 del vector i 7 de la matriu). El guany és d'un 10/5 = 2. Utilitzem una MC associativa per conjunts d'una via amb 2 blocs de 8 paraules
+   (el mateix que una associativa de 2 blocs). Així la primera vegada plenem un bloc amb tot el vector i l'altre bloc amb tota una fila de la matriu.
+   Ara, aprofitant que l'últim element d'accés a memòria és el vector, reemplaçarem el bloc de la via on està la matriu per la nova fila de la matriu,
+   gràcies al comportament LRU.
