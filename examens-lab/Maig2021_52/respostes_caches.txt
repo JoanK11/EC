@@ -1,0 +1,8 @@
+a) 61%. 8 fallades per A i 6 fallades per max_parella.
+
+b) 75%. 6 fallades per A i 3 fallades per max_parella.
+
+c) En l'apartat a) teniem iteracions on A i max_parella compartien el mateix bloc en cache (els casos i=12, i=14, i=16 i i=18). Això provocava
+   una sèrie d'accesos on s'anirien reemplaçant A per max_parella, passant a produir-se més miss que en les altres iteracions.
+   Això amb una cache associativa de dues vies, A i max_parella mai s'arriben a reemplaçar, ja que cadascuna ocupa una via de cache diferent i en
+   cap moment s'intersequen les dues.
