@@ -1,0 +1,11 @@
+a) MAT0 ocupa 32 blocs en total. 16 blocs passen per la cache almenys un cop.
+
+b) 20%. 20%. 40%.
+
+c) En els primers dos casos teníem una cache en la qual els accessos s'anaven reemplaçant cada cop, ja que MAT0, MAT1 i MAT2 sempre anaven a parar al mateix bloc.
+   Això provocava que no es guardés el seu contingut per al següent accés (l'únic hit que tenim per a cada iteració és el d'escriptura de MAT2). Per tant, per a 
+   cada iteració tindríem 4 miss i 1 hit = 1/5 = 20% d'encerts.
+   En el tercer cas, cada matriu té associada una via i per tant no es produeixen reemplaçaments entre matrius. Ara tindrem dos encerts per a cada iteració
+   (les dues escriptures). Per tant, tindrem 3 miss i 2 hits = 2/5 = 40% d'encerts. 
+
+d) Localitat temporal (pel bucle en el programa) i espacial (pels recorreguts de matrius) en totes les matrius.
