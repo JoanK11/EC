@@ -39,7 +39,7 @@ for:
 	addiu $a0, $t0, 4	# &v[0]
 	move $a1, $s2		# last_elem
 	lh $a2, 0($sp)		# aux
-	jal tmp
+	jal calc
 	
 	lw $s0, 44($sp)
 	lw $s1, 48($sp)
