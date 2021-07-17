@@ -1,0 +1,200 @@
+----Activitat 1.A----
+
+Exercici 1.1:
+	.data
+aa: 	.byte -5
+bb: 	.half -344
+cc: 	.dword -3
+dd: 	.byte 0xA0
+ee: 	.word 5799
+ff: 	.half -1
+
+Exercici 1.2:
+Etiqueta: aa	@Memòria: 0x10010000	Contingut: 0xFB
+Etiqueta: X	@Memòria: 0x10010001	Contingut:  -
+Etiqueta: bb	@Memòria: 0x10010002	Contingut: 0xA8
+Etiqueta: bb	@Memòria: 0x10010003	Contingut: 0xFE
+Etiqueta: X	@Memòria: 0x10010004	Contingut:  -
+Etiqueta: X	@Memòria: 0x10010005	Contingut:  -
+Etiqueta: X	@Memòria: 0x10010006	Contingut:  -
+Etiqueta: X	@Memòria: 0x10010007	Contingut:  -
+Etiqueta: cc	@Memòria: 0x10010008	Contingut: 0xFD
+Etiqueta: cc	@Memòria: 0x10010009	Contingut: 0xFF
+Etiqueta: cc	@Memòria: 0x1001000A	Contingut: 0xFF
+Etiqueta: cc	@Memòria: 0x1001000B	Contingut: 0xFF
+Etiqueta: cc	@Memòria: 0x1001000C	Contingut: 0xFF
+Etiqueta: cc	@Memòria: 0x1001000D	Contingut: 0xFF
+Etiqueta: cc	@Memòria: 0x1001000E	Contingut: 0xFF
+Etiqueta: cc	@Memòria: 0x1001000F	Contingut: 0xFF
+Etiqueta: dd	@Memòria: 0x10010010	Contingut: 0xA0
+Etiqueta: X	@Memòria: 0x10010011	Contingut:  -
+Etiqueta: X	@Memòria: 0x10010012	Contingut:  -
+Etiqueta: X	@Memòria: 0x10010013	Contingut:  -
+Etiqueta: ee	@Memòria: 0x10010014	Contingut: 0xA7
+Etiqueta: ee	@Memòria: 0x10010015	Contingut: 0x16
+Etiqueta: ee	@Memòria: 0x10010016	Contingut: 0x00
+Etiqueta: ee	@Memòria: 0x10010017	Contingut: 0x00
+Etiqueta: ff	@Memòria: 0x10010018	Contingut: 0xFF
+Etiqueta: ff	@Memòria: 0x10010019	Contingut: 0xFF
+Etiqueta: X	@Memòria: 0x1001001A	Contingut:  -
+Etiqueta: X	@Memòria: 0x1001001B	Contingut:  -
+
+----Activitat 1.B----
+
+   Macros MIPS	       		     Instruccions MIPS
+la $s3, aa	--> 	lui $1, 0x00001001 / ori $19, $1, 0x00000000	
+li $s4, 65535	--> 	ori $20, $0, 0x0000ffff
+li $s5, 65536	--> 	lui $1, 0x00000001 / ori $21, $1, 0x00000000
+move $s0, $s1	--> 	addu $16, $0, $17
+
+----Activitat 1.C----
+
+Exercici 1.3:
+
+			Adreça efectiva		Núm bytes accedits	Valor llegit/escrit
+la $s0, aa
+lb $s1, 0($s0)	-->	  0x10010000			2			0xFB
+
+la $s0, bb
+lh $s2, 0($s0)	--> 	  0x10010002			4			0xFEA8
+
+la $s0, cc
+lw $s3, 0($s0) 	-->	  0x10010008			8			0xFFFFFFFD
+lw $s4, 4($s0) 	--> 	  0x1001000C			8			0xFFFFFFFF
+
+la $s0, dd
+lbu $s5, 0($s0)	--> 	  0x10010010			1			0xA0
+
+la $s0, ff
+lh $s6, 0($s0)	--> 	  0x10010018			4			0xFFFF
+
+sh $s1, 0($s0)	--> 	  0x10010018			4			0xFFFB
+
+----Activitat 1.D----
+
+Exercici 1.4:
+
+&pdada:	0x10010004
+&dada:	0x10010000
+pdada:	0x10010000
+dada:	0x0003
+*pdada:	0x0003
+
+----Activitat 1.E----
+
+Exercici 1.5:
+
+	.data
+A: 	.word 3, 5, 7
+punter: .word 0
+
+	.text
+	.globl main
+main:
+	la $t0, A		# t0 = &A
+	la $t1, punter		# t1 = &punter
+
+	addiu $t2, $t0, 8	# t2 = &A[2]
+	sw $t2, 0($t1)		# punter = &A[2]
+
+	lw $t3, 0($t2)		# t3 = *punter
+	addiu $s0, $t3, 2	# s0 = *punter + 2;
+	
+	lw $t3, -8($t2)		# t3 = *(punter - 2)
+	addu $s0, $t3, $s0	# temp = *(punter - 2) + temp
+
+	sw $s0, 4($t0)		# A[1] = temp 
+
+	li $v0, 1
+	addu $a0, $s0, $zero
+	syscall			# Mostra s0 (= temp) en pantalla
+
+	jr $ra			# main retorna al codi de startup
+
+----Activitat 1.F----
+
+Exercici 1.6:
+
+vec: .word 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+@vec[i] = vec + i*8
+
+la $t0, vec		# t0 = &vec[0]
+sll $t1, $s2, 2		# t1 = i*4
+addu $t0, $t0, $t1	# t0 = &vec[i]
+lw $s1, 0($t0)		# s1 = vec[i]
+
+----Activitat 1.G----
+
+Exercici 1.7:
+
+	.data
+fib: 	.space 40
+
+	.text
+	.globl main
+main:
+	addiu $s0, $zero, 2
+	la $t7, fib		# t7 = &fib[0]
+	sw $zero, 0($t7)	# fib[0] = 0
+	addiu $t1, $zero, 1
+	sw $t1, 4($t7)		# fib[1] = 1
+
+while:
+	slti $t0, $s0, 10
+	beq $t0, $zero, fi
+
+	sll $t1, $s0, 2		# t1 = i*4
+	addu $t4, $t7, $t1	# t4 = &vec[0] + i*4
+	lw $t2, -4($t4)		# t2 = fib[i-1]
+	lw $t3, -8($t4)		# t3 = fib[i-2]
+	addu $t2, $t2, $t3
+	addu $t1, $t7, $t1	# t1 = &fib[i]
+	sw $t2, 0($t1)	
+
+	addiu $s0, $s0, 1	# ++i;
+	b while
+
+fi: 
+	jr $ra			# main retorna al codi de startup
+
+
+----Activitat 1.H----
+
+Exercici 1.8:
+
+	.data
+cadena: .byte -1, -1, -1, -1, -1, -1
+vec: 	.word 5, 6, 8, 9, 1
+
+	.text
+	.globl main
+main:
+	li $s0, 0
+	la $t6, cadena
+	la $t7, vec
+	li $t5, 16
+
+while: 
+	li $t0, 5
+	bge $s0, $t0, fi
+
+	sll $t1, $s0, 2		# t1 = i*4
+	sub $t2, $t5, $t1	# t2 = [4-i]
+	addu $t2, $t7, $t2	# t2 = &vec[4-i]
+	lw $t2, 0($t2)		# t2 = vec[4-i]
+	addiu $t2, $t2, '0'	# t2 = vec[4-i] + '0'
+	addu $t3, $t6, $s0	# t3 = &cadena + i
+	sb $t2, 0($t3)		# &cadena[i] = t2
+
+	addiu $s0, $s0, 1
+	b while
+
+fi:
+	li $t1, 0		# t1 = 0
+	sb $t1, 5($t6)		# $cadena[5] = sentinella
+
+	li $v0, 4
+	la $a0, cadena
+	syscall
+
+	jr $ra			# main retorna al codi de startup
