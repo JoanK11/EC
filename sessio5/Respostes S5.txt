@@ -1,5 +1,5 @@
-Alumne: Caballero Castro, Joan
-Subgrup: 23
+Alumne: 
+Subgrup: 
 
 ----Exercici 5.1----
 1) 0x1001014
