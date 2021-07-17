@@ -1,0 +1,119 @@
+Alumne: Caballero Castro, Joan
+Subgrup: 23
+
+----Exercici 5.1----
+1) 0x1001014
+2) 0x14
+3) 0x080080
+
+----Exercici 5.2----
+1)
+Iteració	Adreça		Bloc MC		Encert / Fallada
+1		0x10010000	0x00		       F
+2		0x10010002	0x00		       E
+3		0x10010004	0x00		       E
+4		0x10010006	0x00		       E
+5		0x10010008	0x01		       F
+6		0x1001000A	0x01		       E
+7		0x1001000C	0x01		       E
+8		0x1001000E	0x01		       E
+9		0x10010010	0x02		       F
+10		0x10010012	0x02		       E
+
+2) Taxa d'encerts = 75%
+
+----Exercici 5.3----
+1) No, ja que el programa accedirà als 32 blocs disponibles originalment.
+
+2) Sí, la taxa d'encerts augmentarà perquè els errors provenen dels canvis de bloc, i ara a l'augmentar el nombre de paraules i haurà menys canvis.
+
+----Exercici 5.4----
+Hi hauria la mateixa taxa d'encerts.
+
+----Exercici 5.5----
+a) nins = 711 instruccions
+b) texe (en ns.) = 16970 ns = 10x(711x2 + 25x(10+1))
+c) texe (en ns.) = 19220 ns = 10x(711x2 + 100x(6-1)), Guany = 19220/16920 = 1.1326
+
+----Exercici 5.6----
+1)
+Iteració i=0
+vec[]		R/W		h/m
+1		R		m
+0		R		h
+2		R		h
+0		R		h
+3		R		h
+2		R		h
+4		R		m
+2		R		h
+0		R		h
+2		R		h
+0		W		h
+2		W		h
+
+Iteració i=1
+vec[]		R/W		h/m
+2		R		h
+1		R		h
+3		R		h
+2		R		h
+4		R		h
+2		R		h
+1		R		h
+2		R		h
+1		W		h
+2		W		h
+
+Iteració i=2
+vec[]		R/W		h/m
+3		R		h
+2		R		h
+4		R		h
+3		R		h
+2		R		h
+3		R		h
+2		W		h
+3		W		h
+
+Iteració i=3
+vec[]		R/W		h/m
+4		R		h
+3		R		h
+3		R		h
+4		R		h
+3		W		h
+4		W		h
+
+2) 
+Iteració i=0 --> 12 accessos, 10 encerts
+Iteració i=1 --> 10 accessos, 10 encerts
+Iteració i=2 --> 8 accessos, 8 encerts
+Iteració i=3 --> 6 accessos, 6 encerts
+
+3) Taxa d'encerts del 94,44% (34/36)
+
+----Exercici 5.7----
+No canviaria res ni en política d'escriptura immediata sense assignació com en política d'escriptura retardada amb assignació, ja que
+després de les dues primeres fallades de lectura, tindríem disponibles a la cache els dos únics blocs de necessitem al llarg de tot el programa.
+
+----Exercici 5.8----
+1) 16 fallades, una per a cada bloc que necessitaríem, ja que no hi hauria reemplaçaments perquè no excedim la capacitat de memòria de la cache.
+2) La podem reduir a un nombre mínim de 16 blocs, ja que serien els únics blocs que utilitzariem durant el llarg de l'execució (16*4 = 64 = elements del vector).
+
+----Exercici 5.9----
+Taxa d'encerts del 0% (0/384). Cada vegada que accedim a B, sobreescribim el contingut de cache de A, i el mateix passa amb C-B y A-C.
+
+----Exercici 5.10----
+A	.space 512
+	.space 16
+B:	.space 512
+	.space 16
+C:	.space 512
+Ara quan accedim a A, B y C, no sobreescribim el contingut de cadascuna, sinó que al bloc MC X estarà el contingut d'A, X+1 el contingut de B i a X+2 el contingut de C.
+
+----Exercici 5.11----
+La taxa d'encerts seria del 75%.
+
+----Exercici 5.12----
+El nombre mínim hauria de ser 3, un per vector que tenim (A, B i C).
