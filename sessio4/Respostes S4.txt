@@ -1,0 +1,60 @@
+Alumne: Caballero Castro, Joan
+Subgrup: 23
+
+---Exercici 4.1---
+descompon:
+	slt $t0, $a0, $zero
+	sw $t0, 0($a1)
+	sll $a0, $a0, 1
+	bne $a0, $zero, else
+	li $t0, 0
+	b fi
+else:
+	li $t0, 18
+while: 
+	sll $a0, $a0, 1
+	addiu $t0, $t0, -1
+	bge $a0, $zero, while
+	srl $a0, $a0, 8
+	li $t1, 0x7FFFFF
+	and $a0, $a0, $t1
+	addiu $t0, $t0, 127
+fi:
+	sw $t0, 0($a2)
+	sw $a0, 0($a3)
+	jr $ra
+
+---Exercici 4.2---
+compon:
+	sll $a0, $a0, 31
+	sll $a1, $a1, 23
+	or $v0, $a0, $a1
+	or $v0, $v0, $a2
+	mtc1 $v0, $f0
+	jr $ra
+
+Puc consultar el seu valor en decimal amb un syscall després de cridar a compon, per exemple:
+	la $t0, cflotant
+	swc1 $f12, 0($t0)
+	li $v0, 2
+	syscall
+
+Això dona com a resultat: -32024.625
+
+---Exercici 4.3---
+    Decimal		cfixa (valor inicial) 	cflotant(valor final)
+    +0.0		0x00000000		0x00000000
+    -0.0		0x80000000		0x80000000
+    12.75		0x0000CC00		0x414C0000
+
+---Exercici 4.4---
+
+1) La mantissa hauria de tenir més de 23 xifres significatives per produir una pèrdua de precisió en la conversió.
+
+2) cfixa: 0x00800001	cflotant: 0x45000001
+
+3) cf = (cf >> 8) & 0x7FFFFF
+
+4) Per truncament.
+
+5) 1*20^20 es troba dins el rang del format de cflotant però fora del rang de cfixa. El menor número és 1*2^19 = 524288.
