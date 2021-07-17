@@ -1,3 +1,6 @@
+Alumne: 
+Subgrup: 
+
 ---Exercici 4.1---
 descompon:
 	slt $t0, $a0, $zero
