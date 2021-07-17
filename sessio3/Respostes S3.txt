@@ -1,3 +1,6 @@
+Alumne: 
+Subgrup: 
+
 ------Exercici 3.1------
 	.data
 mat1: 	.space 120
